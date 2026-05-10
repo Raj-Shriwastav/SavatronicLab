@@ -1,30 +1,44 @@
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
 
 export default function Navbar() {
   return (
-    <nav className="w-full bg-background border-b border-zinc-800 sticky top-0 z-50">
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-6 h-6 bg-brand-neon text-black flex items-center justify-center font-bold text-xs group-hover:bg-white transition-colors">
-            S
+    <nav className="glass-nav w-full fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 h-[56px] flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-[18px] h-[18px] bg-cyan flex items-center justify-center shrink-0">
+            <span className="text-black font-black text-[9px] leading-none">S</span>
           </div>
-          <span className="font-bold text-lg text-white tracking-tight uppercase group-hover:text-brand-neon transition-colors">Savatronic</span>
+          <span className="font-semibold text-[14px] text-white/90 tracking-tight group-hover:text-white transition-colors">
+            Savatronic
+          </span>
         </Link>
-        
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-          <Link href="/about" className="text-zinc-400 hover:text-brand-neon transition-colors uppercase">Company</Link>
-          <Link href="/products" className="text-zinc-400 hover:text-brand-neon transition-colors uppercase">Products</Link>
-          <Link href="/research-impact" className="text-zinc-400 hover:text-brand-neon transition-colors uppercase">Research</Link>
-          <Link href="/team" className="text-zinc-400 hover:text-brand-neon transition-colors uppercase">Team</Link>
-          <Link href="/contact" className="ml-4 px-5 py-2 border border-brand-neon text-brand-neon hover:bg-brand-neon hover:text-black transition-colors uppercase text-xs tracking-widest font-bold shadow-[0_0_15px_rgba(255,244,183,0.2)] hover:shadow-[0_0_20px_rgba(255,244,183,0.4)]">
-            Demo
-          </Link>
+
+        <div className="hidden md:flex items-center gap-0">
+          {[
+            { label: "Company",  href: "/about" },
+            { label: "Products", href: "/products" },
+            { label: "Research", href: "/research-impact" },
+            { label: "Team",     href: "/team" },
+            { label: "Investors",href: "/investors" },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="px-4 py-2 text-[13px] font-medium text-white/45 hover:text-white/90 transition-colors duration-150"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
-        
-        <button className="md:hidden text-white hover:text-brand-neon transition-colors">
-          <Menu className="w-6 h-6" />
-        </button>
+
+        <Link href="/contact" className="btn-cyan h-[36px]">
+          <span className="text-[12px]">Book Demo</span>
+          <div className="icon-box h-[36px] w-[36px]">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="#67FCF1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </Link>
       </div>
     </nav>
   );

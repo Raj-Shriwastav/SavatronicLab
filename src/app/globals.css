@@ -1,56 +1,146 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000B58;
-  --foreground: #FFF4B7;
+  --background: #0C0C0C;
+  --foreground: #FFFFFF;
+  --cyan: #67FCF1;
+  --line: rgba(255, 255, 255, 0.08);
+  --muted: rgba(255, 255, 255, 0.40);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Overused Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Explicit brand tokens — used everywhere */
-  --color-brand-yellow: #FFF4B7;
-  --color-brand-neon:   #FFF4B7;
-  --color-brand-teal:   #006A67;
-  --color-brand-navy:   #003161;
-  --color-brand-deep:   #000B58;
+  /* Brand */
+  --color-cyan:        #67FCF1;
+  --color-brand-cyan:  #67FCF1;
+  --color-brand-dark:  #0C0C0C;
+  --color-line:        rgba(255,255,255,0.08);
+  --color-muted:       rgba(255,255,255,0.40);
 
-  /* Map standard Tailwind shades to palette so existing utility classes work */
-  --color-black:      #000B58;
-  --color-zinc-950:   #003161;
-  --color-zinc-900:   #003161;
-  --color-zinc-800:   #006A67;
-  --color-zinc-700:   #006A67;
-  --color-white:      #FFF4B7;
-  --color-zinc-100:   #FFF4B7;
-  --color-zinc-300:   color-mix(in srgb, #FFF4B7 80%, transparent);
-  --color-zinc-400:   color-mix(in srgb, #FFF4B7 60%, transparent);
-  --color-zinc-500:   color-mix(in srgb, #FFF4B7 40%, transparent);
-  --color-zinc-600:   color-mix(in srgb, #FFF4B7 30%, transparent);
+  /* Backward-compat aliases */
+  --color-brand-yellow: #67FCF1;
+  --color-brand-neon:   #67FCF1;
+  --color-brand-teal:   rgba(255,255,255,0.08);
+  --color-brand-navy:   #111111;
+  --color-brand-deep:   #0C0C0C;
+
+  /* Tailwind shade remaps */
+  --color-black:      #0C0C0C;
+  --color-zinc-950:   #111111;
+  --color-zinc-900:   #161616;
+  --color-zinc-800:   rgba(255,255,255,0.08);
+  --color-zinc-700:   rgba(255,255,255,0.14);
+  --color-zinc-600:   rgba(255,255,255,0.30);
+  --color-zinc-500:   rgba(255,255,255,0.45);
+  --color-zinc-400:   rgba(255,255,255,0.60);
+  --color-zinc-300:   rgba(255,255,255,0.75);
+  --color-zinc-100:   #FFFFFF;
+  --color-white:      #FFFFFF;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* ── Base ─────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  color: #fff;
+  font-family: 'Overused Grotesk', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Brutalist: zero rounded corners globally */
-* {
-  border-radius: 0 !important;
+* { border-radius: 0 !important; }
+
+/* ── Trilo-style MASKED line reveal ───────────────── */
+/*
+  Wrap each line/word in .clip-wrap, and put the
+  actual content in .clip-inner. JS adds .visible to
+  .clip-wrap when it enters the viewport.
+*/
+.clip-wrap {
+  overflow: hidden;
+  display: block;
+}
+.clip-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.clip-wrap.visible .clip-inner {
+  transform: translateY(0%);
 }
 
-/* Smooth video modal backdrop */
+/* Stagger delays for siblings */
+.clip-wrap:nth-child(1) .clip-inner { transition-delay: 0s; }
+.clip-wrap:nth-child(2) .clip-inner { transition-delay: 0.08s; }
+.clip-wrap:nth-child(3) .clip-inner { transition-delay: 0.16s; }
+.clip-wrap:nth-child(4) .clip-inner { transition-delay: 0.24s; }
+.clip-wrap:nth-child(5) .clip-inner { transition-delay: 0.32s; }
+
+/* Fade-up for non-text elements */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.delay-1 { transition-delay: 0.1s; }
+.fade-up.delay-2 { transition-delay: 0.2s; }
+.fade-up.delay-3 { transition-delay: 0.3s; }
+.fade-up.delay-4 { transition-delay: 0.4s; }
+
+/* ── Divider lines (Trilo horizontal rules) ───────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── Trilo glass nav ──────────────────────────────── */
+.glass-nav {
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── Trilo CTA button ─────────────────────────────── */
+.btn-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--cyan);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.btn-cyan:hover {
+  background: #fff;
+  box-shadow: 0 0 28px rgba(103, 252, 241, 0.35);
+}
+.btn-cyan .icon-box {
+  width: 40px;
+  height: 40px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.btn-cyan span { padding: 0 16px; }
+
+/* ── Modal backdrop ───────────────────────────────── */
 .modal-backdrop {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }

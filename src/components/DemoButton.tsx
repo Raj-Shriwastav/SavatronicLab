@@ -11,9 +11,10 @@ export default function DemoButton({ productName, videoUrl }: { productName: str
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-8 py-4 bg-brand-yellow text-black hover:bg-white hover:shadow-[0_0_30px_rgba(255,244,183,0.6)] transition-all font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 w-max will-change-transform"
+        className="inline-flex items-center gap-3 px-7 py-4 bg-brand-cyan text-black font-bold text-sm tracking-wide hover:bg-white hover:shadow-[0_0_24px_rgba(103,252,241,0.35)] transition-all duration-300 glow-cyan"
       >
-        <Play className="w-4 h-4" /> Watch Demo
+        <Play className="w-4 h-4" fill="currentColor" />
+        Watch Demo
       </button>
 
       <VideoModal

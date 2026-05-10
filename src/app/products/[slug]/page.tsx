@@ -1,48 +1,60 @@
 import Link from "next/link";
-import { ArrowLeft, Calendar, Download, Users, Microscope, FileText } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Calendar, Download, Users } from "lucide-react";
 import { notFound } from "next/navigation";
 import DemoButton from "@/components/DemoButton";
 
-/* ─── Product data ─────────────────────────────────────────────────── */
 const productsData: Record<string, {
   name: string;
   tagline: string;
-  description: string;
   longDescription: string;
   specs: string[];
   useCases: string[];
   videoUrl?: string;
+  heroImage: string;
+  detailImages: string[];
 }> = {
   "neuroglow": {
     name: "NeuroGlow",
     tagline: "AI-powered hand-eye coordination rehabilitation.",
-    description: "An advanced system using interactive LED-based engagement paired with real-time data analytics.",
-    longDescription: "NeuroGlow transforms the rehabilitation experience for children and adults with neurological conditions. Using an adaptive LED grid that responds in real-time to patient performance, the system gamifies repetitive motor exercises, dramatically improving engagement and compliance. An integrated AI analytics engine continuously measures response times, accuracy, and fatigue patterns, automatically adjusting difficulty to stay in the patient's optimal therapeutic zone.",
+    longDescription: "NeuroGlow transforms the rehabilitation experience using an adaptive LED grid that responds in real-time to patient performance, gamifying motor exercises and dramatically improving engagement. An integrated AI analytics engine continuously measures response times, accuracy, and fatigue patterns — automatically adjusting difficulty to keep patients in their optimal therapeutic zone.",
     specs: ["Adaptive AI Analytics Engine", "Interactive LED Stimulus Grid", "Cloud Data Sync & Reports", "Gamified Therapy Protocols", "Parent/Clinician Dashboard"],
     useCases: ["Autism Spectrum Disorder", "Cerebral Palsy", "Post-Stroke Recovery", "Traumatic Brain Injury"],
     videoUrl: undefined,
+    heroImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1800&q=80&fit=crop",
+    detailImages: [
+      "https://images.unsplash.com/photo-1530026405186-ed1f139313f3?w=900&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=900&q=80&fit=crop",
+    ],
   },
   "smart-walker": {
     name: "Smart Walker",
     tagline: "Mobility assistance for Parkinson's and elderly care.",
-    description: "Unprecedented stability and gait monitoring for patients outside the clinical environment.",
-    longDescription: "The Smart Walker integrates gyroscopic stabilization, real-time gait analysis sensors, and an emergency fall-detection alert system into a clinically validated mobility aid. Unlike conventional walkers, it transmits objective biomechanical data directly to a physician's dashboard, enabling tele-rehabilitation and remote progress tracking. This closes the critical gap in continuity of care for patients who cannot visit a clinic frequently.",
+    longDescription: "The Smart Walker integrates gyroscopic stabilization, real-time gait analysis sensors, and an emergency fall-detection alert system into a clinically validated mobility aid. Unlike conventional walkers, it transmits objective biomechanical data directly to a physician's dashboard — enabling tele-rehabilitation and remote progress tracking.",
     specs: ["Gyroscopic Stabilization System", "Real-time 3-Axis Gait Analysis", "Automatic Fall Detection & Alerts", "Tele-Rehab Cloud Integration", "Long-Lasting Battery (24h)"],
     useCases: ["Parkinson's Disease", "Elderly Post-Surgical Rehab", "Multiple Sclerosis", "Hip Fracture Recovery"],
     videoUrl: undefined,
+    heroImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1800&q=80&fit=crop",
+    detailImages: [
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=900&q=80&fit=crop",
+    ],
   },
   "foot-pressure": {
     name: "Foot Pressure System",
     tagline: "Advanced gait analysis and biomechanics monitoring.",
-    description: "High-resolution sensor grids capturing dynamic foot pressure distribution.",
-    longDescription: "The Foot Pressure System deploys a dense array of piezoelectric sensors to map the complete distribution of ground reaction forces during walking, running, and standing. The resulting pressure maps are rendered in real-time on a clinical dashboard, giving orthopedic surgeons and physiotherapists unprecedented precision in diagnosing gait abnormalities, monitoring post-surgical recovery, and designing targeted interventions. Data can be exported in standard clinical formats for EMR integration.",
+    longDescription: "The Foot Pressure System deploys a dense array of piezoelectric sensors to map the complete distribution of ground reaction forces during walking, running, and standing. The resulting pressure maps are rendered in real-time on a clinical dashboard, giving orthopedic surgeons and physiotherapists unprecedented precision in diagnosing gait abnormalities.",
     specs: ["High-Density Piezoelectric Array", "Dynamic 3D Pressure Mapping", "Live Biomechanics Dashboard", "EMR-Compatible Data Export", "Under-Shoe & Platform Modes"],
     useCases: ["Orthopedic Assessment", "Sports Biomechanics", "Diabetic Foot Monitoring", "Post-Surgical Gait Analysis"],
     videoUrl: undefined,
+    heroImage: "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1800&q=80&fit=crop",
+    detailImages: [
+      "https://images.unsplash.com/photo-1576671081837-49000212a370?w=900&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1530026405186-ed1f139313f3?w=900&q=80&fit=crop",
+    ],
   }
 };
 
-/* ─── Page ─────────────────────────────────────────────────────────── */
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = productsData[slug];
@@ -51,170 +63,161 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="flex flex-col text-white">
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden min-h-screen flex items-end pb-24 bg-background border-b border-brand-teal">
-        {/* Background image / 3D render placeholder */}
+      {/* ─── HERO ── */}
+      <section className="relative min-h-screen flex items-end pb-24 pt-20 overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-brand-navy flex items-center justify-center">
-            <span className="font-mono text-brand-yellow/10 text-xl tracking-widest uppercase">
-              &lt;Fill_data: {product.name} 3D Background Render&gt;
-            </span>
-          </div>
-          {/* Gradient keeps text readable over any image */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10"></div>
+          <Image
+            src={product.heroImage}
+            alt={product.name}
+            fill
+            className="object-cover opacity-40"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60"></div>
         </div>
 
-        <div className="container mx-auto px-6 max-w-6xl relative z-10">
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 text-brand-yellow/70 font-bold uppercase tracking-widest text-xs mb-16 hover:text-brand-yellow transition-colors"
-          >
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <Link href="/products" className="inline-flex items-center gap-2 text-white/40 text-xs font-medium hover:text-brand-cyan transition-colors mb-16 tracking-wide uppercase">
             <ArrowLeft className="w-3 h-3" /> All Products
           </Link>
 
-          <h1 className="text-7xl md:text-[7rem] font-black tracking-tighter leading-none mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 glass border border-brand-cyan/30 text-brand-cyan text-xs font-bold tracking-widest uppercase mb-8">
+            <span className="w-1.5 h-1.5 bg-brand-cyan"></span>
+            Hardware Platform
+          </div>
+
+          <h1 className="text-7xl md:text-[7rem] font-medium tracking-tight leading-none mb-6">
             {product.name}
           </h1>
-          <p className="text-2xl text-brand-yellow font-medium max-w-2xl mb-12 leading-snug">
+          <p className="text-2xl text-white/50 font-medium max-w-xl mb-14 leading-snug">
             {product.tagline}
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* Video demo — client component that owns modal state */}
             <DemoButton productName={product.name} videoUrl={product.videoUrl} />
-
             <Link
               href="#book"
-              className="px-8 py-4 border border-brand-teal text-brand-yellow hover:bg-brand-teal hover:text-white hover:shadow-[0_0_20px_rgba(0,106,103,0.5)] transition-all font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 w-max"
+              className="inline-flex items-center gap-3 px-7 py-4 glass border border-white/20 text-white font-bold text-sm tracking-wide hover:border-brand-cyan/40 hover:text-brand-cyan transition-all duration-300"
             >
-              <Calendar className="w-4 h-4" /> Book Demo Session
+              <Calendar className="w-4 h-4" />
+              Book Demo Session
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Overview & Specs ── */}
-      <section className="bg-background border-b border-brand-teal">
-        <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-brand-teal">
-          <div className="p-12 md:p-20">
-            <span className="font-mono text-brand-yellow/50 text-xs tracking-widest uppercase mb-4 block">Overview</span>
-            <h2 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">About This Product</h2>
-            <p className="text-lg text-zinc-300 leading-relaxed">{product.longDescription}</p>
-          </div>
-          <div className="p-12 md:p-20 bg-brand-navy">
-            <span className="font-mono text-brand-yellow/50 text-xs tracking-widest uppercase mb-4 block">Engineering</span>
-            <h2 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">Technical Specs</h2>
-            <ul className="space-y-5">
-              {product.specs.map((spec, i) => (
-                <li key={i} className="flex items-center gap-4 text-zinc-200 font-medium border-b border-brand-teal/30 pb-5 last:border-b-0 last:pb-0">
-                  <span className="w-2 h-2 bg-brand-yellow shrink-0"></span>
-                  {spec}
-                </li>
-              ))}
-            </ul>
+      {/* ─── OVERVIEW + SPECS ── */}
+      <section className="bg-zinc-950 border-t border-white/8">
+        <div className="container mx-auto px-6 max-w-7xl py-24">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-4 block">Overview</span>
+              <h2 className="text-4xl font-medium tracking-tight text-white mb-8">About this product</h2>
+              <p className="text-lg text-white/50 leading-relaxed">{product.longDescription}</p>
+
+              {/* Temp product photos */}
+              <div className="grid grid-cols-2 gap-3 mt-10">
+                {product.detailImages.map((img, i) => (
+                  <div key={i} className="relative aspect-video overflow-hidden border border-white/8">
+                    <Image src={img} alt={`${product.name} detail ${i + 1}`} fill className="object-cover opacity-70 hover:opacity-100 transition-opacity duration-300" unoptimized />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-4 block">Engineering</span>
+              <h2 className="text-4xl font-medium tracking-tight text-white mb-8">Technical Specs</h2>
+              <ul className="space-y-0 border-t border-white/8">
+                {product.specs.map((spec, i) => (
+                  <li key={i} className="flex items-center gap-4 py-5 border-b border-white/8 text-white/60 hover:text-white transition-colors duration-200">
+                    <span className="w-1.5 h-1.5 bg-brand-cyan shrink-0"></span>
+                    <span className="font-medium">{spec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Use Cases ── */}
-      <section className="bg-brand-deep border-b border-brand-teal py-24">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <span className="font-mono text-brand-yellow/50 text-xs tracking-widest uppercase mb-4 block">Applications</span>
-          <h2 className="text-4xl font-black text-white mb-12 tracking-tight uppercase flex items-center gap-4">
-            <Users className="w-8 h-8 text-brand-teal" /> Who This Helps
+      {/* ─── USE CASES ── */}
+      <section className="bg-background border-t border-white/8 py-24">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-4 block">Applications</span>
+          <h2 className="text-4xl font-medium tracking-tight text-white mb-12 flex items-center gap-4">
+            <Users className="w-7 h-7 text-white/20" />
+            Who This Helps
           </h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-brand-teal border border-brand-teal">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {product.useCases.map((uc, i) => (
-              <div key={i} className="p-8 hover:bg-brand-teal/10 transition-colors group">
-                <span className="font-mono text-brand-yellow/40 text-xs mb-3 block">0{i + 1}</span>
-                <p className="text-white font-bold text-lg leading-tight group-hover:text-brand-yellow transition-colors">{uc}</p>
+              <div key={i} className="glass border border-white/8 p-8 hover:border-brand-cyan/40 hover:bg-brand-cyan/5 transition-all duration-300 group">
+                <span className="font-mono text-brand-cyan/40 text-xs mb-3 block">0{i + 1}</span>
+                <p className="text-white font-medium text-lg leading-tight group-hover:text-brand-cyan transition-colors duration-200">{uc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Investor Deck ── */}
-      <section className="bg-background border-b border-brand-teal py-28">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* ─── INVESTOR DECK ── */}
+      <section className="bg-zinc-950 border-t border-white/8 py-24">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="glass border border-white/8 p-12 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
             <div>
-              <span className="font-mono text-brand-yellow/50 text-xs tracking-widest uppercase mb-4 block flex items-center gap-2">
-                <FileText className="w-3 h-3" /> Investor Intelligence
-              </span>
-              <h2 className="text-4xl font-black text-white mb-6 tracking-tight uppercase">
-                {product.name} <span className="text-brand-yellow">Investor Brief</span>
-              </h2>
-              <p className="text-zinc-400 text-lg leading-relaxed">
-                Download the dedicated deck for {product.name} — covering unit economics, total addressable market, clinical validation milestones, IP filings, and manufacturing cost projections.
+              <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-4 block">Investor Intelligence</span>
+              <h2 className="text-4xl font-medium tracking-tight text-white mb-4">{product.name} Investor Brief</h2>
+              <p className="text-white/40 max-w-xl leading-relaxed">
+                Download the dedicated deck — covering unit economics, clinical validation milestones, IP filings, and total addressable market for {product.name}.
               </p>
             </div>
-            <div className="flex flex-col gap-4">
-              <button className="px-8 py-5 bg-brand-yellow text-black font-bold uppercase tracking-widest text-sm hover:bg-white hover:shadow-[0_0_30px_rgba(255,244,183,0.5)] transition-all flex items-center justify-center gap-3 w-full">
-                <Download className="w-4 h-4" /> Download Investor Deck
-              </button>
-              <p className="font-mono text-brand-yellow/40 text-xs text-center uppercase tracking-widest">
-                &lt;Fill_data: Add PDF link to product data&gt;
-              </p>
-            </div>
+            <button className="shrink-0 inline-flex items-center gap-3 px-7 py-4 bg-brand-cyan text-black font-bold text-sm tracking-wide hover:bg-white transition-colors duration-200 glow-cyan">
+              <Download className="w-4 h-4" />
+              Download Deck
+            </button>
           </div>
         </div>
       </section>
 
-      {/* ── Book Demo & Contact ── */}
-      <section id="book" className="bg-brand-navy py-28">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            {/* Left: info */}
+      {/* ─── BOOK + CONTACT ── */}
+      <section id="book" className="bg-background border-t border-white/8 py-24">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <span className="font-mono text-brand-yellow/50 text-xs tracking-widest uppercase mb-4 block">Get In Touch</span>
-              <h2 className="text-4xl font-black text-white mb-6 tracking-tight uppercase">
-                Integrate <span className="text-brand-yellow">{product.name}</span>
+              <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-4 block">Contact</span>
+              <h2 className="text-4xl font-medium tracking-tight text-white mb-6">
+                Integrate <span className="text-brand-cyan">{product.name}</span>
               </h2>
-              <p className="text-zinc-300 text-lg leading-relaxed mb-10">
+              <p className="text-white/40 text-lg leading-relaxed mb-10">
                 Reach our clinical deployment team to discuss pilot programs, institutional licensing, or bulk pricing.
               </p>
-              <div className="space-y-4 text-zinc-400 text-sm font-mono">
-                <p><span className="text-brand-yellow/60">Email ——</span> &lt;Fill_data: contact@savatronic.com&gt;</p>
-                <p><span className="text-brand-yellow/60">Phone ——</span> &lt;Fill_data: +91 XXXXX XXXXX&gt;</p>
+              <div className="space-y-4">
+                <p className="text-white/40 text-sm"><span className="text-brand-cyan font-mono">Email ——</span> &lt;Fill_data: contact@savatronic.com&gt;</p>
+                <p className="text-white/40 text-sm"><span className="text-brand-cyan font-mono">Phone ——</span> &lt;Fill_data: +91 XXXXX XXXXX&gt;</p>
               </div>
             </div>
 
-            {/* Right: form */}
             <form className="flex flex-col gap-6">
-              <div className="flex flex-col gap-1">
-                <label className="font-mono text-zinc-500 text-xs tracking-widest uppercase">Your Name</label>
-                <input
-                  type="text"
-                  className="w-full bg-transparent border-b border-brand-teal py-3 text-white font-bold tracking-wide placeholder:text-zinc-700 focus:outline-none focus:border-brand-yellow transition-colors"
-                />
+              {[
+                { label: "Your Name", type: "text" },
+                { label: "Email Address", type: "email" },
+                { label: "Organization / Hospital", type: "text" },
+              ].map((field) => (
+                <div key={field.label} className="flex flex-col gap-2">
+                  <label className="font-mono text-white/30 text-xs tracking-widest uppercase">{field.label}</label>
+                  <input
+                    type={field.type}
+                    className="w-full bg-transparent border-b border-white/12 py-3 text-white font-medium focus:outline-none focus:border-brand-cyan transition-colors duration-200"
+                  />
+                </div>
+              ))}
+              <div className="flex flex-col gap-2">
+                <label className="font-mono text-white/30 text-xs tracking-widest uppercase">Message</label>
+                <textarea rows={3} className="w-full bg-transparent border-b border-white/12 py-3 text-white font-medium focus:outline-none focus:border-brand-cyan transition-colors duration-200 resize-none" />
               </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-mono text-zinc-500 text-xs tracking-widest uppercase">Email Address</label>
-                <input
-                  type="email"
-                  className="w-full bg-transparent border-b border-brand-teal py-3 text-white font-bold tracking-wide placeholder:text-zinc-700 focus:outline-none focus:border-brand-yellow transition-colors"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-mono text-zinc-500 text-xs tracking-widest uppercase">Organization / Hospital</label>
-                <input
-                  type="text"
-                  className="w-full bg-transparent border-b border-brand-teal py-3 text-white font-bold tracking-wide placeholder:text-zinc-700 focus:outline-none focus:border-brand-yellow transition-colors"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-mono text-zinc-500 text-xs tracking-widest uppercase">Message</label>
-                <textarea
-                  rows={3}
-                  className="w-full bg-transparent border-b border-brand-teal py-3 text-white font-bold tracking-wide placeholder:text-zinc-700 focus:outline-none focus:border-brand-yellow transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="button"
-                className="mt-4 px-8 py-4 bg-brand-yellow text-black font-bold uppercase tracking-widest text-sm hover:bg-white hover:shadow-[0_0_20px_rgba(255,244,183,0.5)] transition-all w-full"
-              >
+              <button type="button" className="mt-4 w-full py-4 bg-brand-cyan text-black font-bold tracking-wide text-sm hover:bg-white transition-colors duration-200">
                 Send Inquiry
               </button>
             </form>

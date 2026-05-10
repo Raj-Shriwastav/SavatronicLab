@@ -2,45 +2,43 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-background border-t border-zinc-800 text-zinc-100 py-16 mt-auto">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-xl font-bold mb-4 uppercase tracking-tight text-white group cursor-default">
-              Savatronic <span className="text-brand-neon">Tech</span>
-            </h3>
-            <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">
-              Engineering accessible rehabilitation technologies for neurological and motor healthcare.
+    <footer className="border-t border-white/[0.08] pt-16 pb-10 bg-background">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="w-[18px] h-[18px] bg-cyan flex items-center justify-center">
+                <span className="text-black font-black text-[9px]">S</span>
+              </div>
+              <span className="font-semibold text-[14px] text-white/80">Savatronic Tech</span>
+            </div>
+            <p className="text-[13px] text-white/30 leading-relaxed max-w-xs">
+              Engineering accessible rehabilitation technologies for neurological and motor healthcare recovery.
             </p>
           </div>
-          
           <div>
-            <h4 className="text-xs font-bold mb-4 text-zinc-600 uppercase tracking-widest">Platform</h4>
-            <ul className="space-y-3 text-sm font-medium">
-              <li><Link href="/about" className="text-zinc-400 hover:text-brand-neon transition-colors">Company</Link></li>
-              <li><Link href="/products" className="text-zinc-400 hover:text-brand-neon transition-colors">Products</Link></li>
-              <li><Link href="/research-impact" className="text-zinc-400 hover:text-brand-neon transition-colors">Research</Link></li>
-              <li><Link href="/team" className="text-zinc-400 hover:text-brand-neon transition-colors">Team</Link></li>
-              <li><Link href="/investors" className="text-zinc-400 hover:text-brand-neon transition-colors">Investors</Link></li>
+            <h4 className="text-[11px] text-white/20 font-semibold uppercase tracking-[0.12em] mb-5">Platform</h4>
+            <ul className="space-y-3">
+              {[["Company","/about"],["Products","/products"],["Research","/research-impact"],["Team","/team"],["Investors","/investors"]].map(([label, href]) => (
+                <li key={href}><Link href={href} className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">{label}</Link></li>
+              ))}
             </ul>
           </div>
-          
           <div>
-            <h4 className="text-xs font-bold mb-4 text-zinc-600 uppercase tracking-widest">Connect</h4>
-            <ul className="space-y-3 text-sm font-medium">
-              <li><a href="mailto:<Fill_data: Contact Email>" className="text-zinc-400 hover:text-brand-neon transition-colors">Email Us</a></li>
-              <li><a href="<Fill_data: LinkedIn URL>" className="text-zinc-400 hover:text-brand-neon transition-colors">LinkedIn</a></li>
-              <li><a href="<Fill_data: Instagram URL>" className="text-zinc-400 hover:text-brand-neon transition-colors">Instagram</a></li>
-              <li className="pt-2 text-zinc-600 font-mono text-xs">&lt;Fill_data: Location Address&gt;</li>
+            <h4 className="text-[11px] text-white/20 font-semibold uppercase tracking-[0.12em] mb-5">Connect</h4>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">&lt;Fill_data: Email&gt;</a></li>
+              <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">LinkedIn</a></li>
+              <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">Instagram</a></li>
             </ul>
           </div>
         </div>
-        
-        <div className="border-t border-zinc-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 uppercase tracking-wide">
-          <p>&copy; {new Date().getFullYear()} Savatronic Tech.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms</Link>
+        <div className="divider mb-8" />
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[12px] text-white/20">© {new Date().getFullYear()} Savatronic Tech. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="text-[12px] text-white/20 hover:text-cyan transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-[12px] text-white/20 hover:text-cyan transition-colors">Terms</Link>
           </div>
         </div>
       </div>

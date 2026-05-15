@@ -1,5 +1,3 @@
-import { Trophy, Calendar } from "lucide-react";
-
 export default function AchievementsNews() {
   const events = [
     { title: "<Fill_data: Event/Award 1>", date: "<Fill_data: Date 1>", description: "<Fill_data: Short description>", type: "Award" },
@@ -8,33 +6,37 @@ export default function AchievementsNews() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Achievements & News</h1>
-        <p className="text-lg text-gray-600">
-          Stay up to date with our latest milestones, awards, IEEE events, and research showcases.
-        </p>
-      </div>
+    <div className="flex flex-col text-white pb-24">
+      <section className="pt-[150px] pb-[80px] px-6 max-w-7xl mx-auto w-full">
+        <div className="clip-wrap mb-4">
+          <p className="clip-inner text-[11px] font-semibold text-white/30 uppercase tracking-[0.2em]">Milestones</p>
+        </div>
+        <h1 className="text-[clamp(3.5rem,8vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+          <span className="clip-wrap block"><span className="clip-inner block">Achievements</span></span>
+          <span className="clip-wrap block"><span className="clip-inner block text-white/40">& News.</span></span>
+        </h1>
+      </section>
 
-      <div className="max-w-4xl mx-auto space-y-8">
-        {events.map((event, i) => (
-          <div key={i} className="flex gap-6 p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
-            <div className="shrink-0 w-16 h-16 rounded-full bg-brand-sky/20 flex items-center justify-center text-brand-deep">
-              <Trophy className="w-8 h-8" />
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm font-semibold text-brand-soft uppercase tracking-wider">{event.type}</span>
-                <span className="flex items-center gap-1 text-sm text-gray-500">
-                  <Calendar className="w-4 h-4" /> {event.date}
-                </span>
+      <div className="divider" />
+
+      <section className="max-w-7xl mx-auto w-full px-6 py-24">
+        <div className="space-y-0 border-t border-line">
+          {events.map((event, i) => (
+            <div key={i} className="group flex flex-col md:flex-row md:items-center gap-6 py-8 border-b border-line hover:bg-white/[0.01] transition-colors duration-500 fade-up">
+              <div className="md:w-24 shrink-0">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold">{event.type}</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h3>
-              <p className="text-gray-600">{event.description}</p>
+              <div className="flex-1">
+                <h3 className="text-xl font-medium text-white mb-1 group-hover:translate-x-2 transition-transform duration-500">{event.title}</h3>
+                <p className="text-[14px] text-white/40">{event.description}</p>
+              </div>
+              <div className="md:w-32 shrink-0 text-right">
+                <span className="text-[12px] text-white/20 font-mono">{event.date}</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

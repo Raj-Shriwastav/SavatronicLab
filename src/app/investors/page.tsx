@@ -2,57 +2,54 @@ import { Download } from "lucide-react";
 
 export default function Investors() {
   return (
-    <div className="flex flex-col text-zinc-100">
-      <section className="bg-black text-white border-b border-zinc-800 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-neon/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="container mx-auto px-6 py-24 max-w-5xl relative z-10">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12">INVESTOR RELATIONS</h1>
-          <p className="text-2xl md:text-3xl text-zinc-400 font-medium leading-tight max-w-4xl">
-            Savatronic Tech is actively seeking strategic partnerships to scale our clinical deployments and accelerate product manufacturing.
-          </p>
+    <div className="flex flex-col text-white pb-24">
+      <section className="pt-[150px] pb-[80px] px-6 max-w-7xl mx-auto w-full">
+        <div className="clip-wrap mb-4">
+          <p className="clip-inner text-[11px] font-semibold text-white/30 uppercase tracking-[0.2em]">Investor Relations</p>
+        </div>
+        <h1 className="text-[clamp(3.5rem,8vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+          <span className="clip-wrap block"><span className="clip-inner block">Partner with</span></span>
+          <span className="clip-wrap block"><span className="clip-inner block text-white/40">the future.</span></span>
+        </h1>
+        <p className="text-[15px] text-white/40 max-w-md leading-relaxed mt-8 fade-up delay-2">
+          Savatronic Tech is actively seeking strategic partnerships to scale clinical deployments and accelerate product manufacturing.
+        </p>
+      </section>
+
+      <div className="divider" />
+
+      {/* Metrics Grid */}
+      <section className="border-b border-line">
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {[
+            { label: "Traction", title: "<Fill_data: Revenue / Beta Testing Numbers>", body: "Currently deployed in beta testing with strong patient engagement metrics." },
+            { label: "Intellectual Property", title: "<Fill_data: Patents Pending>", body: "Proprietary hardware sensors combined with custom ML models for gait analysis and cognitive engagement." },
+            { label: "Funding Goal", title: "<Fill_data: Seed Round Target>", body: "Raising capital for mass manufacturing, regulatory (FDA/CE) clearance, and team expansion." },
+          ].map((item, i) => (
+            <div key={i} className="p-12 md:p-16 border-b md:border-b-0 md:border-r border-line last:border-r-0 hover:bg-white/[0.01] transition-colors duration-500 group fade-up">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-6 block group-hover:text-cyan transition-colors">{item.label}</span>
+              <h3 className="text-2xl font-medium text-white mb-4 tracking-tight">{item.title}</h3>
+              <p className="text-[14px] text-white/40 leading-relaxed">{item.body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="bg-background">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-800 border-b border-zinc-800">
-          
-          <div className="p-12 bg-background flex flex-col justify-between group hover:bg-zinc-900 transition-colors">
-            <div>
-              <span className="font-mono text-zinc-600 group-hover:text-brand-neon transition-colors text-xs tracking-widest uppercase mb-4 block">Traction</span>
-              <h3 className="text-3xl font-black text-white mb-6 tracking-tight">&lt;Fill_data: Revenue / Beta Testing Numbers&gt;</h3>
-              <p className="text-zinc-500 leading-relaxed mb-12">Currently deployed in beta testing across &lt;Fill_data: X&gt; clinics, with strong patient engagement metrics.</p>
-            </div>
-          </div>
-
-          <div className="p-12 bg-zinc-950 flex flex-col justify-between group hover:bg-zinc-900 transition-colors">
-            <div>
-              <span className="font-mono text-zinc-600 group-hover:text-brand-neon transition-colors text-xs tracking-widest uppercase mb-4 block">Intellectual Property</span>
-              <h3 className="text-3xl font-black text-white mb-6 tracking-tight">&lt;Fill_data: Patents Pending&gt;</h3>
-              <p className="text-zinc-500 leading-relaxed mb-12">Proprietary hardware sensors combined with our custom ML models for gait analysis and cognitive engagement.</p>
-            </div>
-          </div>
-
-          <div className="p-12 bg-background flex flex-col justify-between group hover:bg-zinc-900 transition-colors">
-            <div>
-              <span className="font-mono text-zinc-600 group-hover:text-brand-neon transition-colors text-xs tracking-widest uppercase mb-4 block">Funding Goal</span>
-              <h3 className="text-3xl font-black text-white mb-6 tracking-tight">&lt;Fill_data: Seed Round Target&gt;</h3>
-              <p className="text-zinc-500 leading-relaxed mb-12">Raising capital for mass manufacturing, regulatory (FDA/CE) clearance, and expansion of the engineering team.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section className="bg-zinc-950 border-b border-zinc-800">
-        <div className="container mx-auto px-6 py-24 max-w-3xl text-center">
-          <h2 className="text-4xl font-black tracking-tighter text-white mb-6">PITCH DECK</h2>
-          <p className="text-zinc-400 mb-12">
-            Download our comprehensive investor presentation detailing the market opportunity, our competitive moat, and unit economics.
+      {/* Pitch Deck Download */}
+      <section className="py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-[11px] font-semibold text-white/30 uppercase tracking-[0.2em] mb-8 fade-up">Pitch Deck</p>
+          <h2 className="text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-white mb-6 fade-up delay-1">
+            Download our investor presentation.
+          </h2>
+          <p className="text-[15px] text-white/40 mb-12 fade-up delay-2">
+            Covering market opportunity, competitive moat, and unit economics.
           </p>
-          <a href="#" className="inline-flex items-center gap-3 px-8 py-4 bg-brand-neon text-black font-bold uppercase tracking-widest text-sm hover:bg-white hover:shadow-[0_0_20px_rgba(255,244,183,0.4)] transition-all w-max mx-auto group">
-            Download PDF <Download className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+          <a href="#" className="inline-flex items-center gap-4 px-8 py-4 bg-white text-black font-bold text-[11px] tracking-[0.2em] uppercase hover:bg-cyan transition-colors duration-300 fade-up delay-3">
+            Download PDF
+            <Download className="w-4 h-4" />
           </a>
-          <p className="font-mono text-brand-neon/50 text-xs mt-6 uppercase tracking-widest">Password Required</p>
+          <p className="text-[10px] text-white/20 mt-6 uppercase tracking-[0.2em] fade-up delay-4">Password Required</p>
         </div>
       </section>
     </div>

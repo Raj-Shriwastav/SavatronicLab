@@ -1,47 +1,62 @@
+import ContactForm from "@/components/ContactForm";
+
 export default function Contact() {
   return (
-    <div className="flex flex-col text-zinc-100">
-      <section className="bg-background border-b border-zinc-800">
-        <div className="container mx-auto px-6 py-24 max-w-5xl">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-12 text-white">CONTACT</h1>
-          <p className="text-2xl md:text-3xl text-zinc-300 font-medium leading-tight max-w-4xl">
-            Reach out to our team for product demos, research partnerships, or media inquiries.
+    <div className="flex flex-col text-white pb-24">
+      {/* Cinematic Header */}
+      <section className="pt-[150px] pb-[80px] px-6 max-w-7xl mx-auto w-full">
+        <div className="clip-wrap mb-4">
+          <p className="clip-inner text-[11px] font-semibold text-white/30 uppercase tracking-[0.2em]">
+            Connect
           </p>
         </div>
+        <h1 className="text-[clamp(3.5rem,8vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em] mb-8">
+          <span className="clip-wrap block"><span className="clip-inner block">Initiate</span></span>
+          <span className="clip-wrap block"><span className="clip-inner block text-white/40">contact.</span></span>
+        </h1>
+        <p className="text-[15px] text-white/40 max-w-md leading-relaxed fade-up delay-2">
+          Reach out to our team for product demos, research partnerships, or media inquiries.
+        </p>
       </section>
 
-      <section className="bg-zinc-950 border-b border-zinc-800">
-        <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800 min-h-[600px]">
+      <div className="divider" />
+
+      {/* Split Content */}
+      <section className="border-b border-line">
+        <div className="flex flex-col md:flex-row">
           
-          <div className="p-12 md:p-24 bg-background flex flex-col justify-center">
-            <h2 className="text-3xl font-black tracking-tight mb-12 uppercase text-white">Direct Inquiries</h2>
-            <div className="space-y-8">
+          {/* Left Column: Direct Inquiries */}
+          <div className="md:w-1/2 p-8 md:p-16 lg:p-24 border-r border-line bg-[#050505]">
+            <h2 className="text-[clamp(1.5rem,2vw,2rem)] font-medium tracking-tight mb-12 fade-up">
+              Direct Inquiries
+            </h2>
+            
+            <div className="space-y-12 fade-up delay-1">
               <div>
-                <p className="font-mono text-zinc-600 text-xs tracking-widest uppercase mb-2">Email</p>
-                <a href="mailto:<Fill_data: Email>" className="text-2xl font-bold text-white hover:text-brand-neon hover:underline underline-offset-8 transition-colors">&lt;Fill_data: Contact Email&gt;</a>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-3">Email</p>
+                <a href="mailto:savatronic12@gmail.com" className="text-xl md:text-2xl font-medium text-white hover:text-cyan transition-colors">
+                  savatronic12@gmail.com
+                </a>
               </div>
               <div>
-                <p className="font-mono text-zinc-600 text-xs tracking-widest uppercase mb-2">Phone</p>
-                <p className="text-2xl font-bold text-white">&lt;Fill_data: Phone Number&gt;</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-3">Phone</p>
+                <p className="text-xl md:text-2xl font-medium text-white/60">&lt;Fill_data: Phone Number&gt;</p>
               </div>
               <div>
-                <p className="font-mono text-zinc-600 text-xs tracking-widest uppercase mb-2">Headquarters</p>
-                <p className="text-2xl font-bold text-white leading-tight max-w-xs">&lt;Fill_data: Physical Address / Lab Location&gt;</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-3">Headquarters</p>
+                <p className="text-xl md:text-2xl font-medium text-white/60 leading-tight max-w-xs">
+                  &lt;Fill_data: Physical Office Address&gt;
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="p-12 md:p-24 bg-zinc-950 flex flex-col justify-center relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-neon/5 rounded-full blur-[100px] pointer-events-none"></div>
-             <h2 className="text-3xl font-black tracking-tight mb-12 uppercase text-white relative z-10">Request Demo</h2>
-             <form className="flex flex-col gap-6 relative z-10">
-                <input type="text" placeholder="FULL NAME" className="w-full bg-transparent border-b border-zinc-800 py-4 text-white font-bold uppercase tracking-wide placeholder:text-zinc-600 focus:outline-none focus:border-brand-neon transition-colors" />
-                <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-transparent border-b border-zinc-800 py-4 text-white font-bold uppercase tracking-wide placeholder:text-zinc-600 focus:outline-none focus:border-brand-neon transition-colors" />
-                <input type="text" placeholder="ORGANIZATION" className="w-full bg-transparent border-b border-zinc-800 py-4 text-white font-bold uppercase tracking-wide placeholder:text-zinc-600 focus:outline-none focus:border-brand-neon transition-colors" />
-                <button type="button" className="mt-8 px-8 py-4 bg-brand-neon text-black font-bold uppercase tracking-widest text-sm hover:bg-white hover:shadow-[0_0_20px_rgba(255,244,183,0.4)] transition-all w-max">
-                  Submit Request
-                </button>
-             </form>
+          {/* Right Column: Request Demo Form */}
+          <div className="md:w-1/2 p-8 md:p-16 lg:p-24 bg-background">
+             <h2 className="text-[clamp(1.5rem,2vw,2rem)] font-medium tracking-tight mb-12 fade-up">
+               Request Demo
+             </h2>
+             <ContactForm source="Contact Page" />
           </div>
 
         </div>

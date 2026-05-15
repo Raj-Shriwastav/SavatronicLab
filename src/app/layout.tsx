@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth h-full">
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
         {/* Overused Grotesk — same font as Trilo.bio */}
         <link
@@ -32,12 +33,14 @@ export default function RootLayout({
       <body
         className={`${geistMono.variable} antialiased min-h-full flex flex-col bg-background text-white`}
       >
-        <ScrollReveal />
-        <Navbar />
-        <main className="flex-grow flex flex-col">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScroll>
+          <ScrollReveal />
+          <Navbar />
+          <main className="flex-grow flex flex-col">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

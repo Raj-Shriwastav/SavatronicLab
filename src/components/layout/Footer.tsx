@@ -27,8 +27,8 @@ export default function Footer() {
           <div>
             <h4 className="text-[11px] text-white/20 font-semibold uppercase tracking-[0.12em] mb-5">Connect</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">&lt;Fill_data: Email&gt;</a></li>
-              <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">LinkedIn</a></li>
+              <li><a href="mailto:savatronic12@gmail.com" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">savatronic12@gmail.com</a></li>
+              <li><a href="https://www.linkedin.com/company/savatronic-tech/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">LinkedIn</a></li>
               <li><a href="#" className="text-[13px] text-white/35 hover:text-cyan transition-colors duration-150">Instagram</a></li>
             </ul>
           </div>
